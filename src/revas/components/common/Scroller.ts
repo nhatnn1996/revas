@@ -90,7 +90,7 @@ export default class Scroller {
     if (this._x.offset > condition) {
       this._x.setOffset(0);
     }
-    this._x.onMove(30, 1000);
+    this._x.onMove(26, 1);
     this.emit("start");
     this._timer = requestAnimationFrame(this.scrollAnimate);
   };
