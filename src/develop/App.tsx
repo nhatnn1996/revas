@@ -4,7 +4,7 @@ import Intro from "./Intro";
 import Timeline from "./Timeline";
 import MusicApp from "./Music";
 import SimpleRouter from "./common/simple-router";
-
+import "../revas/components/Context"
 @withContext
 export default class App extends React.Component {
   router = React.createRef<SimpleRouter>();
