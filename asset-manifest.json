@@ -1,29 +1,28 @@
 {
   "files": {
-    "main.css": "/demo/revas-pwa/static/css/main.cf305a7e.chunk.css",
-    "main.js": "/demo/revas-pwa/static/js/main.917a8493.chunk.js",
-    "main.js.map": "/demo/revas-pwa/static/js/main.917a8493.chunk.js.map",
-    "runtime-main.js": "/demo/revas-pwa/static/js/runtime-main.7345a4f5.js",
-    "runtime-main.js.map": "/demo/revas-pwa/static/js/runtime-main.7345a4f5.js.map",
-    "static/js/2.ca821e99.chunk.js": "/demo/revas-pwa/static/js/2.ca821e99.chunk.js",
-    "static/js/2.ca821e99.chunk.js.map": "/demo/revas-pwa/static/js/2.ca821e99.chunk.js.map",
-    "index.html": "/demo/revas-pwa/index.html",
-    "precache-manifest.50ab3761b36ba6e0059cbf41874e0963.js": "/demo/revas-pwa/precache-manifest.50ab3761b36ba6e0059cbf41874e0963.js",
-    "service-worker.js": "/demo/revas-pwa/service-worker.js",
-    "static/css/main.cf305a7e.chunk.css.map": "/demo/revas-pwa/static/css/main.cf305a7e.chunk.css.map",
-    "static/media/1.mp4": "/demo/revas-pwa/static/media/1.3053e405.mp4",
-    "static/media/2.mp4": "/demo/revas-pwa/static/media/2.3f38bebe.mp4",
-    "static/media/3.mp4": "/demo/revas-pwa/static/media/3.88e77052.mp4",
-    "static/media/4.mp4": "/demo/revas-pwa/static/media/4.4570cc8a.mp4",
-    "static/media/5.mp4": "/demo/revas-pwa/static/media/5.266886b6.mp4",
-    "static/media/6.mp4": "/demo/revas-pwa/static/media/6.aec7d684.mp4",
-    "static/media/7.mp4": "/demo/revas-pwa/static/media/7.0f599cec.mp4",
-    "static/media/logo.png": "/demo/revas-pwa/static/media/logo.48529616.png"
+    "main.css": "/revas/static/css/main.cf305a7e.chunk.css",
+    "main.js": "/revas/static/js/main.a1bc89ce.chunk.js",
+    "main.js.map": "/revas/static/js/main.a1bc89ce.chunk.js.map",
+    "runtime-main.js": "/revas/static/js/runtime-main.dd6f35cc.js",
+    "runtime-main.js.map": "/revas/static/js/runtime-main.dd6f35cc.js.map",
+    "static/js/2.d628e01d.chunk.js": "/revas/static/js/2.d628e01d.chunk.js",
+    "static/js/2.d628e01d.chunk.js.map": "/revas/static/js/2.d628e01d.chunk.js.map",
+    "index.html": "/revas/index.html",
+    "precache-manifest.c20d8fbe7a3d13206c9db7de16a0e33a.js": "/revas/precache-manifest.c20d8fbe7a3d13206c9db7de16a0e33a.js",
+    "service-worker.js": "/revas/service-worker.js",
+    "static/css/main.cf305a7e.chunk.css.map": "/revas/static/css/main.cf305a7e.chunk.css.map",
+    "static/media/2.mp4": "/revas/static/media/2.3f38bebe.mp4",
+    "static/media/3.mp4": "/revas/static/media/3.88e77052.mp4",
+    "static/media/4.mp4": "/revas/static/media/4.4570cc8a.mp4",
+    "static/media/5.mp4": "/revas/static/media/5.266886b6.mp4",
+    "static/media/6.mp4": "/revas/static/media/6.aec7d684.mp4",
+    "static/media/7.mp4": "/revas/static/media/7.0f599cec.mp4",
+    "static/media/logo.png": "/revas/static/media/logo.48529616.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7345a4f5.js",
-    "static/js/2.ca821e99.chunk.js",
+    "static/js/runtime-main.dd6f35cc.js",
+    "static/js/2.d628e01d.chunk.js",
     "static/css/main.cf305a7e.chunk.css",
-    "static/js/main.917a8493.chunk.js"
+    "static/js/main.a1bc89ce.chunk.js"
   ]
 }
