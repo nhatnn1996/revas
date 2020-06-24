@@ -1,20 +1,18 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/revas/favicon.ico" />
+    <link rel="icon" href="https://nhatnn1996.github.io/revas/favicon.ico" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Web site created using create-react-app" />
-    <link rel="apple-touch-icon" href="/revas/logo192.png" />
-    <link rel="manifest" href="/revas/manifest.json" />
+    <link rel="apple-touch-icon" href="https://nhatnn1996.github.io/revas/logo192.png" />
+    <link rel="manifest" href="https://nhatnn1996.github.io/revas/manifest.json" />
     <title>Revas</title>
-    <script src="/revas/touch-emulator.js"></script>
-    <script src="/revas/stats.min.js"></script>
-    <link href="/revas/static/css/main.cf305a7e.chunk.css" rel="stylesheet" />
+    <script src="https://nhatnn1996.github.io/revas/touch-emulator.js"></script>
+    <script src="https://nhatnn1996.github.io/revas/stats.min.js"></script>
   </head>
   <body>
-    <div id="canvas"></div>
+    <div id="canvas"><canvas style="width: 100%; height: 100%;" width="3840" height="2160"></canvas></div>
     <script>
       !(function (f) {
         function e(e) {
@@ -89,34 +87,34 @@
         i();
       })([]);
     </script>
-    <script src="/revas/static/js/2.ca821e99.chunk.js"></script>
-    <script src="/revas/static/js/main.917a8493.chunk.js"></script>
-  </body>
-  <script type="text/javascript">
-    TouchEmulator();
-    if (location.host.indexOf(":") > 0) {
-      const stats = new Stats();
-      stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-      stats.dom.setAttribute(
-        "style",
-        `
-    position: fixed;
-    top: 1px;
-    right: 1px;
-    cursor: pointer;
-    opacity: 0.9;
-    z-index: 10000;`
-      );
-      document.body.appendChild(stats.dom);
+    <script src="https://nhatnn1996.github.io/revas/static/js/2.ca821e99.chunk.js"></script>
+    <script src="https://nhatnn1996.github.io/revas/static/js/main.917a8493.chunk.js"></script>
 
-      const animate = () => {
-        stats.begin();
+    <script type="text/javascript">
+      if (location.host.indexOf(":") > 0) {
+        const stats = new Stats();
+        stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+        stats.dom.setAttribute(
+          "style",
+          `
+  position: fixed;
+  top: 1px;
+  right: 1px;
+  cursor: pointer;
+  opacity: 0.9;
+  z-index: 10000;`
+        );
+        document.body.appendChild(stats.dom);
 
-        // monitored code goes here
-        stats.end();
+        const animate = () => {
+          stats.begin();
+
+          // monitored code goes here
+          stats.end();
+          requestAnimationFrame(animate);
+        };
         requestAnimationFrame(animate);
-      };
-      requestAnimationFrame(animate);
-    }
-  </script>
+      }
+    </script>
+  </body>
 </html>
