@@ -1,0 +1,11 @@
+property:
+    - keyEvent: "left" | "right" | "up" | "down" | enter => các sự kiện keypress
+    - offset: Number => Vị trí hiện tại của scroll
+    - max: Number => độ dài của scrollView
+    - velocity: Number => Vận tốc của animation trong scrollView
+    
+method: 
+    - onMove: ( params: keyEvent, distanceMove ) => Nhận vào nút sự kiện, Quãng đường duy chuyển => tính tọa độ độ duy chuyển
+    - afterEnd  => Tính vận tốc sau khi nhả nút
+    
+
