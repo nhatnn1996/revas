@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "liveServer.settings.port": 5501
 }

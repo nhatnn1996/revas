@@ -28,20 +28,29 @@ export default class ScrollView extends React.Component<ScrollViewProps> {
   private _offset: ScrollViewOffset = { x: 0, y: 0 };
   private _scroller = new Scroller((e) => {
     const { x = 0, y = 0 } = this._offset;
+    if (e.type === "end") {
+      this._deley = false;
+    }
     this.props.horizontal ? this._innerStyle.translateX.setValue(x - e.x) : this._innerStyle.translateY.setValue(y - e.y);
   });
+  private _deley = false;
 
   componentWillUnmount() {
     this._scroller.cancel();
   }
 
   handleKey = (e: KeyboardEvent) => {
-    this._scroller.touchStart(e);
+    if (this._deley === false) {
+      this._deley = true;
+      const keyCode = e.keyCode || e.which;
+      if (keyCode === 38) {
+        this._scroller.keydown("top");
+      }
+    }
   };
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKey);
-    // window.addEventListener("keyup", this.handleKey);
   }
 
   private _onLayout = (frame: Frame) => {
@@ -95,9 +104,9 @@ export default class ScrollView extends React.Component<ScrollViewProps> {
       "Scrollable",
       { ...others, onLayout: this._onLayout },
       React.createElement("ScrollContent", {
-        onTouchStart: this._scroller.touchStart,
-        onTouchMove: this._scroller.touchMove,
-        onTouchEnd: this._scroller.touchEnd,
+        // onTouchStart: this._scroller.touchStart,
+        // onTouchMove: this._scroller.touchMove,
+        // onTouchEnd: this._scroller.touchEnd,
         onLayout: this._onContentLayout,
         style: [
           this._innerStyle,

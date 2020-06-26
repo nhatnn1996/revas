@@ -1,4 +1,4 @@
-import bezier from 'bezier-easing';
+import bezier from "bezier-easing";
 
 export abstract class AnimatedNode {
   abstract getValue(observer?: Function): number;
@@ -34,12 +34,7 @@ export class AnimatedValue extends AnimatedNode {
 }
 
 export class AnimatedInterpolate extends AnimatedNode {
-  constructor(
-    private source: AnimatedNode,
-    private inRange: number[],
-    private outRange: number[],
-    private ease: (t: number) => number
-  ) {
+  constructor(private source: AnimatedNode, private inRange: number[], private outRange: number[], private ease: (t: number) => number) {
     super();
   }
   // TODO: Check inRange is asc
@@ -95,7 +90,7 @@ export class AnimatedTiming {
   }
 
   promise() {
-    return new Promise(resolve => (this._onEnd = resolve));
+    return new Promise((resolve) => (this._onEnd = resolve));
   }
 
   private _loop = () => {
@@ -120,7 +115,7 @@ let ease: (t: number) => number;
 
 function getEase() {
   if (!ease) {
-    ease = bezier(0.42, 0, 1, 1);
+    ease = bezier(0.42, 0.66, 1, 1);
   }
   return ease;
 }
@@ -144,7 +139,7 @@ export const Easing = {
    * Runs an easing function backwards.
    */
   out(easing = getEase()): (t: number) => number {
-    return t => 1 - easing(1 - t);
+    return (t) => 1 - easing(1 - t);
   },
 
   /**
@@ -153,7 +148,7 @@ export const Easing = {
    * duration.
    */
   inOut(easing = getEase()): (t: number) => number {
-    return t => {
+    return (t) => {
       if (t < 0.5) {
         return easing(t * 2) / 2;
       }
@@ -180,6 +175,6 @@ export const Easing = {
   },
   elastic(bounciness = 1): (t: number) => number {
     const p = bounciness * Math.PI;
-    return t => 1 - Math.pow(Math.cos((t * Math.PI) / 2), 3) * Math.cos(t * p);
+    return (t) => 1 - Math.pow(Math.cos((t * Math.PI) / 2), 3) * Math.cos(t * p);
   },
 };

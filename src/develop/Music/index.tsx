@@ -22,7 +22,7 @@ export default class MusicApp extends React.Component {
   };
 
   inner = {
-    marginTop: this.context.clientHeight! / 2 - 57,
+    marginTop: 0,
     marginBottom: this.context.clientHeight! / 2 - 57,
     height: 500,
     flexDirection: "row",
@@ -55,16 +55,6 @@ export default class MusicApp extends React.Component {
               {music.map(this.renderMusic)}
             </View>
           </ScrollView>
-          <ScrollView style={styles.list} paging={113} horizontal={true} onScrollStart={this.startScroll} onScrollEnd={this.checkIndex}>
-            <View style={this.inner} cache>
-              {music.map(this.renderMusic)}
-            </View>
-          </ScrollView>
-          <ScrollView style={styles.list} paging={113} horizontal={true} onScrollStart={this.startScroll} onScrollEnd={this.checkIndex}>
-            <View style={this.inner} cache>
-              {music.map(this.renderMusic)}
-            </View>
-          </ScrollView>
           <Back {...this.props} />
         </View>
       </View>
@@ -87,7 +77,6 @@ const styles = {
   },
   list: {
     flex: 1,
-    marginLeft: 20,
   },
   musicItem: {},
   musicCover: {
@@ -97,11 +86,6 @@ const styles = {
     marginRight: 20,
     marginTop: 15,
     marginBottom: 15,
-    shadowColor: "#98B3B0",
-    shadowBlur: 15,
-    shadowOffsetY: 2,
-    shadowOffsetX: 0,
-    backgroundColor: "#fff",
   },
   musicInfo: {
     flex: 1,

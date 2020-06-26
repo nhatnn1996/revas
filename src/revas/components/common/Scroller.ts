@@ -1,5 +1,6 @@
 import { RevasTouchEvent } from "../../core/Node";
 import { clamp, noop } from "../../core/utils";
+import { Easing } from "../../core/Animated";
 
 export type RevasScrollEventType = "start" | "scroll" | "end" | "none";
 
@@ -20,6 +21,8 @@ export default class Scroller {
   private _tid = "";
   private _timer: any;
   private _offset = 0;
+  private _count = 0;
+  private _current = 0;
 
   horizontal?: boolean = false;
 
@@ -85,18 +88,31 @@ export default class Scroller {
     return true;
   }
 
-  scrollAnimate = () => {
-    const condition = 16 * 420 - 160;
-    if (this._x.offset > condition) {
-      this._x.setOffset(0);
-    }
-    this._x.onMove(26, 1);
-    this.emit("start");
-    this._timer = requestAnimationFrame(this.scrollAnimate);
+  scrollAnimate = (keyEvent: string) => {
+    return () => {
+      const width = 440;
+      const move = 15;
+      this._count += move;
+      if (this._count <= width) {
+        this._timer = requestAnimationFrame(this.scrollAnimate(keyEvent));
+        this._x.onMove(move, 1);
+        this.emit("scroll");
+      } else {
+        const surplus = width - (this._count - move);
+        if (surplus < move) this._x.onMove(surplus, 1);
+        this._count = 0;
+        this.emit("end");
+      }
+
+      const condition = 15 * 440;
+      if (this._x.offset > condition) {
+        this._x.setOffset(move);
+      }
+    };
   };
 
-  touchStart = (e: any) => {
-    this._timer = requestAnimationFrame(this.scrollAnimate);
+  keydown = (keyEvent: string) => {
+    this._timer = requestAnimationFrame(this.scrollAnimate(keyEvent));
   };
 
   touchMove = (e: RevasTouchEvent) => {
