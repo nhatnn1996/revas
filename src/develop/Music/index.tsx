@@ -31,8 +31,9 @@ export default class MusicApp extends React.Component {
   startScroll = () => {
     this.setState({ picking: true });
   };
+  endScroll = () => {};
 
-  checkIndex = (e: RevasScrollEvent) => {
+  checkIndex = (e: any) => {
     const index = Math.round(e.y / 113);
     this.setState({ index, picking: false });
   };
@@ -40,9 +41,6 @@ export default class MusicApp extends React.Component {
   renderMusic = (item: MusicItemData, index: number) => (
     <View style={styles.musicItem} key={index}>
       <Image style={styles.musicCover} src={item.cover} />
-      <View style={styles.musicInfo}>
-        <Text style={styles.musicName}>{item.name}</Text>
-      </View>
     </View>
   );
   render() {

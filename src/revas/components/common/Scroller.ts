@@ -1,6 +1,5 @@
 import { RevasTouchEvent } from "../../core/Node";
 import { clamp, noop } from "../../core/utils";
-import { Easing } from "../../core/Animated";
 
 export type RevasScrollEventType = "start" | "scroll" | "end" | "none";
 
@@ -20,9 +19,11 @@ export default class Scroller {
   private _y = new Handler();
   private _tid = "";
   private _timer: any;
-  private _offset = 0;
   private _count = 0;
-  private _current = 0;
+  private _move = 16;
+  private _keyPressEnd = false;
+  private _timerLastEvenet = 0;
+  private _isRunning = false;
 
   horizontal?: boolean = false;
 
@@ -90,29 +91,84 @@ export default class Scroller {
 
   scrollAnimate = (keyEvent: string) => {
     return () => {
-      const width = 440;
-      const move = 15;
-      this._count += move;
+      let width = 440;
+      this._count += this._move;
       if (this._count <= width) {
         this._timer = requestAnimationFrame(this.scrollAnimate(keyEvent));
-        this._x.onMove(move, 1);
+        const leave = keyEvent === "left" ? this._move * -1 : keyEvent === "right" ? this._move : 0;
+        this._x.onMove(leave, 1);
         this.emit("scroll");
       } else {
-        const surplus = width - (this._count - move);
-        if (surplus < move) this._x.onMove(surplus, 1);
+        let surplus = width - (this._count - this._move);
+        surplus = keyEvent === "left" ? surplus * -1 : keyEvent === "right" ? surplus : 0;
+        if (surplus < this._move) this._x.onMove(surplus, 1);
         this._count = 0;
         this.emit("end");
       }
-
-      const condition = 15 * 440;
+      const condition = 15 * 440; // nhận props vào
       if (this._x.offset > condition) {
-        this._x.setOffset(move);
+        this._x.setOffset(this._move);
       }
     };
   };
-
   keydown = (keyEvent: string) => {
     this._timer = requestAnimationFrame(this.scrollAnimate(keyEvent));
+  };
+
+  scrollKeyPress = (keyEvent: string) => {
+    this._isRunning = true;
+    const condition = 15 * 440;
+    this._count += this._move;
+    console.log("Scroller -> scrollKeyPress -> this._count", this._count);
+    console.log("Scroller -> scrollKeyPress -> this._keyPressEnd", this._keyPressEnd);
+    if (!this._keyPressEnd) {
+      this._timer = requestAnimationFrame(() => this.scrollKeyPress(keyEvent));
+      const leave = keyEvent === "left" ? this._move * -1 : keyEvent === "right" ? this._move : 0;
+      this._x.onMove(leave, 1);
+      this.emit("scroll");
+    } else {
+      this._count = 0;
+      let surplus = 440 - (this._x.offset % 440);
+      if (surplus !== 0) {
+        this._keyPressEnd = false;
+      }
+    }
+    if (this._x.offset > condition) {
+      this._x.setOffset(this._move);
+    }
+  };
+
+  afterKeyPressEnd = (distance: number, keyEvent: string) => {
+    const width = 440;
+    const moveSlow = this._move - 3;
+    if (this._count === 0) {
+      this._count = width - distance;
+    }
+    this._count += moveSlow;
+    if (this._count <= width) {
+      const leave = keyEvent === "left" ? moveSlow * -1 : keyEvent === "right" ? moveSlow : 0;
+      this._x.onMove(leave, 1);
+      this.emit("scroll");
+      this._timer = requestAnimationFrame(() => this.afterKeyPressEnd(distance, keyEvent));
+    } else {
+      let surplus = width - (this._count - moveSlow);
+      surplus = keyEvent === "left" ? surplus * -1 : keyEvent === "right" ? surplus : 0;
+      if (surplus < moveSlow) this._x.onMove(surplus, 1);
+      this._count = 0;
+      this.emit("end");
+    }
+  };
+
+  keyPressBegin = (event: string) => {
+    if (!this._isRunning) {
+      requestAnimationFrame(() => this.scrollKeyPress(event));
+    }
+  };
+  keyPressEnd = () => {
+    if (this._isRunning) {
+      this._keyPressEnd = true;
+      this._isRunning = false;
+    }
   };
 
   touchMove = (e: RevasTouchEvent) => {

@@ -7,9 +7,9 @@ export type ScrollViewOffset = { x?: number; y?: number };
 
 export type ScrollViewProps = {
   horizontal?: boolean;
-  onScroll?: (e: RevasScrollEvent) => any;
+  onScroll?: (e: any) => any;
   onScrollStart?: (e: RevasScrollEvent) => any;
-  onScrollEnd?: (e: RevasScrollEvent) => any;
+  onScrollEnd?: (e: any) => any;
   paging?: boolean | number;
   offset?: ScrollViewOffset;
 } & NodeProps;
@@ -28,29 +28,45 @@ export default class ScrollView extends React.Component<ScrollViewProps> {
   private _offset: ScrollViewOffset = { x: 0, y: 0 };
   private _scroller = new Scroller((e) => {
     const { x = 0, y = 0 } = this._offset;
-    if (e.type === "end") {
-      this._deley = false;
-    }
     this.props.horizontal ? this._innerStyle.translateX.setValue(x - e.x) : this._innerStyle.translateY.setValue(y - e.y);
+    if (e.type === "end") {
+      this._isDelay = false;
+      if (this.props.onScrollEnd) this.props.onScrollEnd(e);
+    }
   });
-  private _deley = false;
+  private _isDelay: boolean = false;
+  private _timeLast: number = 0;
+  private _keycodeLast = 0;
+  private _isPressDown: boolean = false;
+  private _beginKeyPress: boolean = false;
 
   componentWillUnmount() {
     this._scroller.cancel();
   }
 
   handleKey = (e: KeyboardEvent) => {
-    if (this._deley === false) {
-      this._deley = true;
-      const keyCode = e.keyCode || e.which;
-      if (keyCode === 38) {
-        this._scroller.keydown("top");
-      }
+    const keyCode = e.keyCode || e.which;
+
+    this._isDelay = true;
+    if (keyCode === 37) {
+      this._scroller.keyPressBegin("left");
     }
+    if (keyCode === 39) {
+      this._scroller.keyPressBegin("right");
+    }
+
+    if (keyCode === 40) {
+      this._isDelay = false;
+    }
+  };
+
+  handleKeyUp = () => {
+    this._scroller.keyPressEnd();
   };
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKey);
+    window.addEventListener("keyup", this.handleKeyUp);
   }
 
   private _onLayout = (frame: Frame) => {
