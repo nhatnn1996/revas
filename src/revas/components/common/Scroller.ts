@@ -27,7 +27,7 @@ export default class Scroller {
 
   horizontal?: boolean = false;
 
-  constructor(private listener: (e: any) => any) {}
+  constructor(private listener: (e: any) => any) { }
 
   set maxX(value: number) {
     this._x.max = value;
@@ -119,18 +119,18 @@ export default class Scroller {
     this._isRunning = true;
     const condition = 15 * 440;
     this._count += this._move;
-    console.log("Scroller -> scrollKeyPress -> this._count", this._count);
-    console.log("Scroller -> scrollKeyPress -> this._keyPressEnd", this._keyPressEnd);
     if (!this._keyPressEnd) {
       this._timer = requestAnimationFrame(() => this.scrollKeyPress(keyEvent));
       const leave = keyEvent === "left" ? this._move * -1 : keyEvent === "right" ? this._move : 0;
       this._x.onMove(leave, 1);
       this.emit("scroll");
     } else {
+      this._isRunning = false
       this._count = 0;
       let surplus = 440 - (this._x.offset % 440);
       if (surplus !== 0) {
         this._keyPressEnd = false;
+        this._timer = requestAnimationFrame(() => this.afterKeyPressEnd(surplus, keyEvent));
       }
     }
     if (this._x.offset > condition) {
