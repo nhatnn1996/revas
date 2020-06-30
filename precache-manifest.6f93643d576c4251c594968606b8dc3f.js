@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aa4d42fcb7ea464229848de8795dc208",
+    "revision": "a82d49b119eec07e3aa0b68eea394064",
     "url": "/revas/index.html"
   },
   {
-    "revision": "3edf3c8b3b50e0c9399e",
+    "revision": "0ec2d366c0fc9ca4aaad",
     "url": "/revas/static/css/main.cf305a7e.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/revas/static/js/2.a5b5d96d.chunk.js"
   },
   {
-    "revision": "3edf3c8b3b50e0c9399e",
-    "url": "/revas/static/js/main.86a1e5d5.chunk.js"
+    "revision": "0ec2d366c0fc9ca4aaad",
+    "url": "/revas/static/js/main.b17c7edf.chunk.js"
   },
   {
     "revision": "2a260746fe9d300a5095",
