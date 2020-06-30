@@ -1,5 +1,6 @@
 import { RevasTouchEvent } from "../../core/Node";
 import { clamp, noop } from "../../core/utils";
+import { AnimatedValue } from "../../core/Animated";
 
 export type RevasScrollEventType = "start" | "scroll" | "end" | "none";
 
@@ -20,14 +21,16 @@ export default class Scroller {
   private _tid = "";
   private _timer: any;
   private _count = 0;
-  private _move = 16;
+  private _move = 10;
   private _keyPressEnd = false;
   private _timerLastEvenet = 0;
   private _isRunning = false;
 
+  private _aniamtedX = new AnimatedValue(0);
+
   horizontal?: boolean = false;
 
-  constructor(private listener: (e: any) => any) { }
+  constructor(private listener: (e: any) => any) {}
 
   set maxX(value: number) {
     this._x.max = value;
@@ -91,7 +94,7 @@ export default class Scroller {
 
   scrollAnimate = (keyEvent: string) => {
     return () => {
-      let width = 440;
+      let width = 320;
       this._count += this._move;
       if (this._count <= width) {
         this._timer = requestAnimationFrame(this.scrollAnimate(keyEvent));
@@ -105,7 +108,7 @@ export default class Scroller {
         this._count = 0;
         this.emit("end");
       }
-      const condition = 15 * 440; // nhận props vào
+      const condition = 15 * width; // nhận props vào
       if (this._x.offset > condition) {
         this._x.setOffset(this._move);
       }
@@ -115,32 +118,35 @@ export default class Scroller {
     this._timer = requestAnimationFrame(this.scrollAnimate(keyEvent));
   };
 
+  movieTemp = () => {
+    this._x.onMove(this._move, 1);
+  };
+  width = 320;
   scrollKeyPress = (keyEvent: string) => {
-    this._isRunning = true;
-    const condition = 15 * 440;
+    const condition = 15 * this.width;
     this._count += this._move;
+    this._isRunning = true;
     if (!this._keyPressEnd) {
       this._timer = requestAnimationFrame(() => this.scrollKeyPress(keyEvent));
       const leave = keyEvent === "left" ? this._move * -1 : keyEvent === "right" ? this._move : 0;
       this._x.onMove(leave, 1);
       this.emit("scroll");
     } else {
-      this._isRunning = false
       this._count = 0;
-      let surplus = 440 - (this._x.offset % 440);
+      let surplus = this.width - (this._x.offset % this.width);
       if (surplus !== 0) {
-        this._keyPressEnd = false;
         this._timer = requestAnimationFrame(() => this.afterKeyPressEnd(surplus, keyEvent));
       }
     }
+
     if (this._x.offset > condition) {
       this._x.setOffset(this._move);
     }
   };
 
   afterKeyPressEnd = (distance: number, keyEvent: string) => {
-    const width = 440;
-    const moveSlow = this._move - 3;
+    const width = 320;
+    const moveSlow = this._move;
     if (this._count === 0) {
       this._count = width - distance;
     }
@@ -154,6 +160,8 @@ export default class Scroller {
       let surplus = width - (this._count - moveSlow);
       surplus = keyEvent === "left" ? surplus * -1 : keyEvent === "right" ? surplus : 0;
       if (surplus < moveSlow) this._x.onMove(surplus, 1);
+      this._keyPressEnd = false;
+      this._isRunning = false;
       this._count = 0;
       this.emit("end");
     }
@@ -161,13 +169,13 @@ export default class Scroller {
 
   keyPressBegin = (event: string) => {
     if (!this._isRunning) {
+      console.log("iowquioeuwqoiueqwoiuo");
       requestAnimationFrame(() => this.scrollKeyPress(event));
     }
   };
   keyPressEnd = () => {
     if (this._isRunning) {
       this._keyPressEnd = true;
-      this._isRunning = false;
     }
   };
 
