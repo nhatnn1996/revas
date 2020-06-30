@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/revas/static/css/main.cf305a7e.chunk.css",
-    "main.js": "/revas/static/js/main.6007732b.chunk.js",
-    "main.js.map": "/revas/static/js/main.6007732b.chunk.js.map",
+    "main.js": "/revas/static/js/main.50d00d2c.chunk.js",
+    "main.js.map": "/revas/static/js/main.50d00d2c.chunk.js.map",
     "runtime-main.js": "/revas/static/js/runtime-main.dd6f35cc.js",
     "runtime-main.js.map": "/revas/static/js/runtime-main.dd6f35cc.js.map",
     "static/js/2.a5b5d96d.chunk.js": "/revas/static/js/2.a5b5d96d.chunk.js",
     "static/js/2.a5b5d96d.chunk.js.map": "/revas/static/js/2.a5b5d96d.chunk.js.map",
     "index.html": "/revas/index.html",
-    "precache-manifest.008e0705f1cbeb4e5c4fe37a9328e769.js": "/revas/precache-manifest.008e0705f1cbeb4e5c4fe37a9328e769.js",
+    "precache-manifest.e5f2098acf943eadad72490e3e659b08.js": "/revas/precache-manifest.e5f2098acf943eadad72490e3e659b08.js",
     "service-worker.js": "/revas/service-worker.js",
     "static/css/main.cf305a7e.chunk.css.map": "/revas/static/css/main.cf305a7e.chunk.css.map",
     "static/media/logo.png": "/revas/static/media/logo.48529616.png"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.dd6f35cc.js",
     "static/js/2.a5b5d96d.chunk.js",
     "static/css/main.cf305a7e.chunk.css",
-    "static/js/main.6007732b.chunk.js"
+    "static/js/main.50d00d2c.chunk.js"
   ]
 }
